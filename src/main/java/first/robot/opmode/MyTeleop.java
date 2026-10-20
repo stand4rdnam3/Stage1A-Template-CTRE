@@ -18,20 +18,21 @@ public class MyTeleop extends PeriodicOpMode {
   /** The Robot instance is passed into the opmode via the constructor. */
   public MyTeleop(Robot robot) {
     this.robot = robot;
+    // xboxController.a(Scheduler.getDefault().getDefaultEventLoop()).ifHigh(getLeftTrigger());
   }
 
   @Override
   public void periodic() {
     /* Called periodically (set time interval) while the robot is enabled. */
-    robot.drivetrain.arcadeDrive(-xboxController.getLeftY(), xboxController.getRightX());
+    robot.drivetrain.arcadeDrive(-xboxController.getLeftY(), -xboxController.getRightX());
 
-    if (xboxController.getRightBumperButton()) {
+    if (xboxController.getLeftBumperButton()) {
       robot.intakeLauncher.setThrottle(0.9);
       robot.feeder.setThrottle(0.75);
-    } else if (xboxController.getLeftBumperButton()) {
+    } else if (xboxController.getRightBumperButton()) {
       robot.intakeLauncher.setThrottle(0.8);
       robot.feeder.setThrottle(-1.0);
-    } else if (xboxController.getAButton()) {
+    } else if (xboxController.getLeftTrigger() > 0.5) {
       robot.intakeLauncher.setThrottle(-0.8);
       robot.feeder.setThrottle(1.0);
     } else {

@@ -34,8 +34,16 @@ public class MyAuto extends PeriodicOpMode {
    */
   @Override
   public void periodic() {
-    if (autoTimer.hasElapsed(4.0)) {
+    if (autoTimer.hasElapsed(13)) {
+      robot.intakeLauncher.setThrottle(0.0);
+      robot.feeder.setThrottle(0.0);
+    } else if (autoTimer.hasElapsed(8.0)) {
+      robot.intakeLauncher.setThrottle(0.9);
+      robot.feeder.setThrottle(0.75);
+    } else if (autoTimer.hasElapsed(5.0)) {
       robot.drivetrain.arcadeDrive(0.0, 0);
+      robot.intakeLauncher.setThrottle(0.8);
+      robot.feeder.setThrottle(-1.0);
     } else {
       robot.drivetrain.arcadeDrive(0.5, 0.0);
     }
